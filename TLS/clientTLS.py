@@ -1,11 +1,14 @@
 import socket
 import ssl
 
-HOST = "34.232.109.82"  
+HOST = "192.168.1.94"  
 PORT = 65432 
 
+
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
-context.load_verify_locations('certificate.crt')
+context.verify_mode = ssl.CERT_OPTIONAL 
+context.check_hostname = False
+context.load_verify_locations(cafile="certs\ca.crt")
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     with context.wrap_socket(sock, server_hostname=HOST) as ssock:
