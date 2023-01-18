@@ -11,8 +11,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     conn, addr = s.accept()
     with conn:
         print(f"Connected by {addr}")
-        data = conn.recv(1024)
-        print(F"data from cliente {data.decode()} \n")
         try:
             cert = open(file,'rb')
             line = cert.read(1024)
@@ -22,4 +20,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             cert.close()
             print("File sended successfully")
         except:
+            data = conn.recv(1024)
+            print(f"client send {data.decode()}")
+            conn.sendall(b"Hello from server")
             print("There is not file")

@@ -1,11 +1,11 @@
 import socket
 import ssl
 
-HOST = "192.168.1.94"  
+HOST = ""  
 PORT = 65432 
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
-context.load_verify_locations(cafile="certs\ca.crt")
+context.load_verify_locations(cafile="./../certs/ca.pem")
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     with context.wrap_socket(sock, server_hostname=HOST) as ssock:
@@ -15,5 +15,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
 
 print(data.decode())
 
-# 34.232.109.82
+# 34.232.109.82  cert.pem
 

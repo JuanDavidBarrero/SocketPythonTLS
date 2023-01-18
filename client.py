@@ -1,6 +1,6 @@
 import socket
 
-HOST = "localhost"  
+HOST = ""  
 PORT = 65432  
 
 file = ""
@@ -16,4 +16,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             line = s.recv(1024)
         print("certicate now here")
     except:
+        s.sendall(b"hello from client")
+        data = s.recv(1024)
+        print(f"the server send {data.decode()}")
         print("End of the code all OKEY")
